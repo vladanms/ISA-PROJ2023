@@ -9,7 +9,7 @@ public class User {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 	
-	@Column(name = "username", nullable = false)
+	@Column(name = "username", unique = true, nullable = false)
 	private String username;
 	
 	@Column(name = "password", nullable = false)
@@ -25,7 +25,7 @@ public class User {
 	private String surname;
 	
 	@Column(name = "gender", nullable = false)
-	private boolean gender;
+	private Gender gender;
 	
 	@Column(name = "personalId", unique = true, nullable = false)
 	private String personalId;
@@ -54,15 +54,18 @@ public class User {
 	@Column(name = "userCategory", nullable = false)
 	private UserCategory category;
 	
+	@Column(name = "verification", nullable = false)
+	private String verification;
+	
 	
 	
 	
 	public User() {
 		super();
 	}
-	public User(Long id, String username, String password, String email, String name, String surname, boolean gender,
+	public User(Long id, String username, String password, String email, String name, String surname, Gender gender,
 			String personalId, String phone, String address, String city, String country, int rewardPoints, int penaltyPoints, UserType type,
-			UserCategory category) {
+			UserCategory category, String verification) {
 		super();
 		if(id != null)
 		{
@@ -83,6 +86,7 @@ public class User {
 		this.penaltyPoints = penaltyPoints;
 		this.type = type;
 		this.category = category;
+		this.verification = verification;
 	}
 	public Long getId() {
 		return id;
@@ -120,10 +124,10 @@ public class User {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public boolean isGender() {
+	public Gender getGender() {
 		return gender;
 	}
-	public void setGender(boolean gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 	public String getPersonalId() {
@@ -179,6 +183,12 @@ public class User {
 	}
 	public void setRewardPoints(int rewardPoints) {
 		this.rewardPoints = rewardPoints;
+	}
+	public String getVerification() {
+		return verification;
+	}
+	public void setVerification(String verification) {
+		this.verification = verification;
 	}
 	
 	
