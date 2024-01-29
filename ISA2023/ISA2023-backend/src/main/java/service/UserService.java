@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import dto.UserDTO;
+import model.ScheduledPickup;
 import model.User;
 import model.UserType;
 import repository.UserRepository;
@@ -99,4 +100,12 @@ public class UserService {
 	{
 		return users.findByUsername(username);
 	}
+	
+	public void penalize(User user, int penalty)
+	{
+		user.setPenaltyPoints(user.getPenaltyPoints() + penalty);
+		users.save(user);
+	}
+	
+	
 }

@@ -1,5 +1,6 @@
 package dto;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -11,8 +12,10 @@ import model.User;
 public class CompanyDTO {
 
 
-	String name;
-	String address;
+	private String name;
+	private String address;
+	private LocalTime openingHours;
+	private LocalTime closingHours;
 	ArrayList<Equipment> availableEquimpent;
 	ArrayList<ScheduledPickup> availablePickups;
 	ArrayList<User> admins;
@@ -21,11 +24,13 @@ public class CompanyDTO {
 		super();
 	}
 
-	public CompanyDTO(Long id, String name, String address, ArrayList<Equipment> availableEquimpent,
+	public CompanyDTO(Long id, String name, String address, LocalTime openingHours, LocalTime closingHours, ArrayList<Equipment> availableEquimpent,
 			ArrayList<ScheduledPickup> availablePickups, ArrayList<User> admins) {
 		super();
 		this.name = name;
 		this.address = address;
+		this.openingHours = openingHours;
+		this.closingHours = closingHours;
 		this.availableEquimpent = availableEquimpent;
 		this.availablePickups = availablePickups;
 		this.admins = admins;
@@ -69,5 +74,21 @@ public class CompanyDTO {
 
 	public void setAdmins(ArrayList<User> admins) {
 		this.admins = admins;
+	}
+
+	public LocalTime getOpeningHours() {
+		return openingHours;
+	}
+
+	public void setOpeningHours(LocalTime openingHours) {
+		this.openingHours = openingHours;
+	}
+
+	public LocalTime getClosingHours() {
+		return closingHours;
+	}
+
+	public void setClosingHours(LocalTime closingHours) {
+		this.closingHours = closingHours;
 	}
 }

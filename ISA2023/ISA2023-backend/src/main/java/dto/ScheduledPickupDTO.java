@@ -1,6 +1,9 @@
 package dto;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -11,7 +14,9 @@ import model.User;
 
 public class ScheduledPickupDTO {
 
-	private LocalDateTime scheduledTime;
+	private LocalDate scheduledDate;
+	private LocalTime scheduledTimeStart;
+	private LocalTime scheduledTimeEnd;
 	private int durationMinutes;
 	private Company company;
 	private ArrayList<Equipment> equipment;
@@ -22,23 +27,49 @@ public class ScheduledPickupDTO {
 		super();
 	}
 
-	public ScheduledPickupDTO(Long id, LocalDateTime scheduledTime, int durationMinutes, Company company, ArrayList<Equipment> equipment, User admin,
-			User user) {
+	public ScheduledPickupDTO(LocalDate scheduledDate, LocalTime scheduledTimeStart, LocalTime scheduledTimeEnd,
+			 Company company, ArrayList<Equipment> equipment, User admin, User user) {
 		super();
-		this.scheduledTime = scheduledTime;
-		this.durationMinutes = durationMinutes;
+		this.scheduledDate = scheduledDate;
+		this.scheduledTimeStart = scheduledTimeStart;
+		this.scheduledTimeEnd = scheduledTimeEnd;
+		this.durationMinutes = ((int) Duration.between(scheduledTimeStart, scheduledTimeEnd).toMinutes());
 		this.company = company;
 		this.equipment = equipment;
 		this.admin = admin;
 		this.user = user;
 	}
 
-	public LocalDateTime getScheduledTime() {
-		return scheduledTime;
+	public LocalDate getScheduledDate() {
+		return scheduledDate;
 	}
 
-	public void setScheduledTime(LocalDateTime scheduledTime) {
-		this.scheduledTime = scheduledTime;
+	public void setScheduledDate(LocalDate scheduledDate) {
+		this.scheduledDate = scheduledDate;
+	}
+
+	public LocalTime getScheduledTimeStart() {
+		return scheduledTimeStart;
+	}
+
+	public void setScheduledTimeStart(LocalTime scheduledTimeStart) {
+		this.scheduledTimeStart = scheduledTimeStart;
+	}
+
+	public LocalTime getScheduledTimeEnd() {
+		return scheduledTimeEnd;
+	}
+
+	public void setScheduledTimeEnd(LocalTime scheduledTimeEnd) {
+		this.scheduledTimeEnd = scheduledTimeEnd;
+	}
+
+	public int getDurationMinutes() {
+		return durationMinutes;
+	}
+
+	public void setDurationMinutes(int durationMinutes) {
+		this.durationMinutes = durationMinutes;
 	}
 
 	public Company getCompany() {
@@ -73,11 +104,5 @@ public class ScheduledPickupDTO {
 		this.user = user;
 	}
 
-	public int getDurationMinutes() {
-		return durationMinutes;
-	}
 
-	public void setDurationMinutes(int durationMinutes) {
-		this.durationMinutes = durationMinutes;
-	}
 }

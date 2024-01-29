@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -11,13 +12,19 @@ public class Company {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	Long id;
+	private Long id;
 	
 	@Column(name = "name", nullable = false)
-	String name;
+	private String name;
 	
 	@Column(name = "address", nullable = false)
-	String address;
+	private String address;
+	
+	@Column(name = "openingHours", nullable = false)
+	private LocalTime openingHours;
+	
+	@Column(name = "closingHours", nullable = false)
+	private LocalTime closingHours;
 	
 	ArrayList<Equipment> availableEquimpent;
 	ArrayList<ScheduledPickup> availablePickups;
@@ -27,7 +34,7 @@ public class Company {
 		super();
 	}
 
-	public Company(Long id, String name, String address, ArrayList<Equipment> availableEquimpent,
+	public Company(Long id, String name, String address, LocalTime openingHours, LocalTime closingHours, ArrayList<Equipment> availableEquimpent,
 			ArrayList<ScheduledPickup> availablePickups, ArrayList<User> admins) {
 		super();
 		if(id != null)
@@ -36,6 +43,8 @@ public class Company {
 		}
 		this.name = name;
 		this.address = address;
+		this.openingHours = openingHours;
+		this.closingHours = closingHours;
 		this.availableEquimpent = availableEquimpent;
 		this.availablePickups = availablePickups;
 		this.admins = admins;
@@ -88,6 +97,24 @@ public class Company {
 	public void setAdmins(ArrayList<User> admins) {
 		this.admins = admins;
 	}
+
+	public LocalTime getOpeningHours() {
+		return openingHours;
+	}
+
+	public void setOpeningHours(LocalTime openingHours) {
+		this.openingHours = openingHours;
+	}
+
+	public LocalTime getClosingHours() {
+		return closingHours;
+	}
+
+	public void setClosingHours(LocalTime closingHours) {
+		this.closingHours = closingHours;
+	}
+	
+	
 	
 	
 	
