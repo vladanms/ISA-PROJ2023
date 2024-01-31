@@ -39,33 +39,33 @@ public class UserService {
 		return "success";
 	}
 	
-	public Boolean login(UserDTO userDTO)	
+	public String login(String credentials, String password)	
 	{
-		User toLogin = users.findByUsername(userDTO.getUsername());
+		User toLogin = users.findByUsername(credentials);
 		if(toLogin.getVerification() == null)
 		{
-			return false;
+			return null;
 		}
 		if(toLogin != null)
 		{
-			if(toLogin.getPassword() == userDTO.getPassword())
+			if(toLogin.getPassword() == password)
 			{
-				return true;
+				return "username";
 			}
 		}
-		toLogin = users.findByEmail(userDTO.getEmail());
+		toLogin = users.findByEmail(credentials);
 		if(toLogin.getVerification() == null)
 		{
-			return false;
+			return null;
 		}
 		if(toLogin != null)
 		{
-			if(toLogin.getPassword() == userDTO.getPassword())
+			if(toLogin.getPassword() == password)
 			{
-				return true;
+				return "email";
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	public Boolean verify(String authorization)
@@ -99,6 +99,17 @@ public class UserService {
 	public User getByUsername(String username) 
 	{
 		return users.findByUsername(username);
+	}
+	
+	public User getByEmail(String email) 
+	{
+		return users.findByEmail(email);
+	}
+	
+	
+	public User getByPersonalId(String username) 
+	{
+		return users.findByPersonalId(username);
 	}
 	
 	public void penalize(User user, int penalty)

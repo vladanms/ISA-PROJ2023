@@ -14,7 +14,7 @@ public class UserDTO {
 	private String email;
 	private String name;
 	private String surname;
-	private Gender gender;
+	private String gender;
 	private String personalId;
 	private String phone;
 	private String address;
@@ -31,7 +31,7 @@ public class UserDTO {
 	public UserDTO() {
 		super();
 	}
-	public UserDTO(String username, String password, String email, String name, String surname, Gender gender,
+	public UserDTO(String username, String password, String email, String name, String surname, String gender,
 			String personalId, String phone, String address, String city, String country, int rewardPoints, int penaltyPoints, UserType type,
 			UserCategory category) {
 		super();
@@ -82,10 +82,10 @@ public class UserDTO {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public Gender getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(Gender gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public String getPersonalId() {

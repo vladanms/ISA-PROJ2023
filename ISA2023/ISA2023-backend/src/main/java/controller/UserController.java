@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import dto.LoginDTO;
 import dto.UserDTO;
 import model.UserType;
 import net.bytebuddy.utility.RandomString;
@@ -27,7 +28,7 @@ public class UserController {
 	private User currentUser = new User();
 	
 	@PostMapping("/register")
-	public String register(@RequestBody UserDTO userDTO) throws MessagingException, UnsupportedEncodingException
+	public ResponseEntity<String> register(@RequestBody UserDTO userDTO) throws MessagingException, UnsupportedEncodingException
 	{
 		User user = new User();
 		
@@ -49,28 +50,32 @@ public class UserController {
 		
 		if(service.register(user) == "usernameError")
 		{
-			return "usernameError";
+			return new ResponseEntity<>("Username already taken.",HttpStatus.BAD_REQUEST);
 		}
 		if(service.register(user) == "emailError")
 		{
-			return "emailError";
+			return new ResponseEntity<>("Email already taken.",HttpStatus.BAD_REQUEST);
 		}
-		if(service.register(user) == "emailError")
+		if(service.register(user) == "idError")
 		{
-			return "emailError";
+			return new ResponseEntity<>("Personal ID already exists.",HttpStatus.BAD_REQUEST);
 		}
 		
-		return "success";
+		return new ResponseEntity<>("Succesfully registered", HttpStatus.OK);
 	}
 	
 
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody UserDTO userDTO){
-		if(service.login(userDTO)) {
-			currentUser = service.getByUsername(userDTO.getUsername());
+	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO){
+		if(service.login(loginDTO.getCredentials(), loginDTO.getPassword()) == "username") {
+			currentUser = service.getByUsername(loginDTO.getCredentials());
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		if(service.login(loginDTO.getCredentials(), loginDTO.getPassword()) == "email") {
+			currentUser = service.getByEmail(loginDTO.getCredentials());
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Invalid username or password",HttpStatus.BAD_REQUEST);
 	}
 	
 	@GetMapping("/verify")

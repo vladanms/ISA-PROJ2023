@@ -25,7 +25,7 @@ public class User {
 	private String surname;
 	
 	@Column(name = "gender", nullable = false)
-	private Gender gender;
+	private String gender;
 	
 	@Column(name = "personalId", unique = true, nullable = false)
 	private String personalId;
@@ -63,7 +63,7 @@ public class User {
 	public User() {
 		super();
 	}
-	public User(Long id, String username, String password, String email, String name, String surname, Gender gender,
+	public User(Long id, String username, String password, String email, String name, String surname, String gender,
 			String personalId, String phone, String address, String city, String country, int rewardPoints, int penaltyPoints, UserType type,
 			UserCategory category, String verification) {
 		super();
@@ -124,10 +124,10 @@ public class User {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public Gender getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(Gender gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public String getPersonalId() {
