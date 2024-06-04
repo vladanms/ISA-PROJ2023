@@ -1,1 +1,12 @@
-<p>reply-complaint works!</p>
+<html>
+	<Header>Reply form</header>
+	<p></p>
+	<form>
+		 <textarea matInput name="response" rows="10" cols="50" overflow-y: scroll [(ngModel)]="response">
+		 </textarea>
+	<p></p>
+    <button mat-flat-button (click)="submit()">Submit</button>
+	<p></p>
+    <button mat-flat-button (click)="cancel()">Cancel</button>
+	</form>
+</html>

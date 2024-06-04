@@ -34,10 +34,19 @@ export class RegisterComponent implements OnInit{
 	   this.gender == "" || this.personalId == "" || this.phone == "" || this.address == "" || this.city == "" || this.country == "")
 	   {
 		   this.toastr.error("Please fill out the full form", "Error");
-		   return;
 	   }
-	   this.registerService.register(this.username,this.password,this.email,this.name,this.surname,
-	   this.gender,this.personalId,this.phone,this.address,this.city,this.country);
-	   this.toastr.success("Succesfully registered", "Success");
-   }
+		this.registerService.register(this.username,this.password,this.email,this.name,this.surname,
+	  	this.gender,this.personalId,this.phone,this.address,this.city,this.country).subscribe(
+      {
+        next: (res) => 
+        {
+          this.toastr.success("Succesfully registered", "success");
+        },
+        error: (e) => 
+        {
+	     this.toastr.error("Error registering; make sure all required fields are unique", "error");
+       }
+    	});
+	   }
+
 }

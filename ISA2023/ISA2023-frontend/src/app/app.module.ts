@@ -11,6 +11,9 @@ import { WriteComplaintComponent } from './write-complaint/write-complaint.compo
 import { ViewComplaintComponent } from './view-complaint/view-complaint.component';
 import { ReplyComplaintComponent } from './reply-complaint/reply-complaint.component';
 import { EquipmentViewComponent } from './equipment-view/equipment-view.component';
+import { HomepageAdminComponent } from './homepage-admin/homepage-admin.component';
+import { HomepageUserComponent } from './homepage-user/homepage-user.component';
+import { UserComplaintsComponent } from './user-complaints/user-complaints.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { EquipmentViewComponent } from './equipment-view/equipment-view.componen
     WriteComplaintComponent,
     ViewComplaintComponent,
     ReplyComplaintComponent,
-    EquipmentViewComponent
+    EquipmentViewComponent,
+    HomepageAdminComponent,
+    HomepageUserComponent,
+    UserComplaintsComponent
   ],
   imports: [
     BrowserModule,

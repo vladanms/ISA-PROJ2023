@@ -1,1 +1,25 @@
-<p>view-complaint works!</p>
+<html>
+	<header>Complaints</header>
+	<p></p>
+	<table mat-table [dataSource]="complaintData">
+	<ng-container matColumnDef="user">
+		<th mat-header-cell>User</th>
+		<td mat-cell>{{complaint.user.username}}</td>
+	</ng-container>
+	<ng-container matColumnDef="datetime">
+		<th mat-header-cell>Made at:</th>
+		<td mat-cell>{{complaint.time}}</td>
+	</ng-container>
+	<ng-container matColumnDef="endTime">
+		<th mat-header-cell>Admin:</th>
+		<td mat-cell>{{complaint.admin.username}}</td>
+	</ng-container>		
+	<ng-container matColumnDef="Schedule">
+        <th mat-header-cell>Reply</th>
+        <td mat-cell><button mat-flat-button (click)="reply(complaint.id)">Reply</button></td>
+    </ng-container>
+	</table>
+	<p></p>
+	<button mat-flat-button (click)="back()">Back</button>
+
+</html>

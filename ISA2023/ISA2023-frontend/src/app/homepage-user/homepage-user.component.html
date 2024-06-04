@@ -1,0 +1,61 @@
+<html>
+    <header>Home</header>
+	<p></p>
+	<p></p>
+	<mat-label>Companies</mat-label>
+	<p></p>
+	<table mat-table [dataSource]="companyData">
+	<ng-container matColumnDef="name">
+        <th mat-header-cell>Name</th>
+        <td mat-cell>{{company.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="address">
+        <th mat-header-cell> Address</th>
+        <td mat-cell>{{company.address}}</td>
+    </ng-container>
+	 <ng-container matColumnDef="view">
+        <th mat-header-cell>View</th>
+        <td mat-cell><button mat-flat-button (click)="view(company.id)">View</button></td>
+    </ng-container>
+	</table>
+	<p></p>
+	<p></p>
+	<form>
+		<mat-label>Filter companies:</mat-label>
+		<p></p>
+		<mat-label>Name:</mat-label>
+        <input matInput name="name" [(ngModel)]="name">
+		<p></p>
+        <mat-label>Address:</mat-label>
+        <input matInput name="address" [(ngModel)]="address">
+		<p></p>
+        <button mat-flat-button (click)="Search()">Filter</button>
+    </form>
+		<p></p>
+		<p></p>
+	<mat-label>Products</mat-label>
+	<p></p>
+	<table mat-table [dataSource]="companyData">
+	<ng-container matColumnDef="name">
+        <th mat-header-cell>Name</th>
+        <td mat-cell>{{product.name}}</td>
+    </ng-container>
+	 <ng-container matColumnDef="listings">
+        <th mat-header-cell>View</th>
+        <td mat-cell><button mat-flat-button (click)="view(company.id)">View</button></td>
+    </ng-container>
+	</table>
+	<p></p>
+	<p></p>
+	<form>
+		<mat-label>Filter products:</mat-label>
+		<p></p>	
+		<mat-label>Name:</mat-label>
+        <input matInput name="name" [(ngModel)]="name">
+		<p></p>
+        <button mat-flat-button (click)="Search()">Filter</button>
+    </form>
+	<p></p>
+	<button mat-flat-button (click)="back()">Back</button>
+	
+</html>

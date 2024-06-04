@@ -24,7 +24,7 @@ public class ScheduledPickup {
 	@Column(name = "scheduledTimeStart", nullable = false)
 	private LocalTime scheduledTimeStart;
 	
-	@Column(name = "scheduledTimeStart", nullable = false)
+	@Column(name = "scheduledTimeEnd", nullable = false)
 	private LocalTime scheduledTimeEnd;
 	
 	@Column(name = "durationMinutes", nullable = false)

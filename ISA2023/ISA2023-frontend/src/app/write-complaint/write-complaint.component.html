@@ -1,1 +1,24 @@
-<p>write-complaint works!</p>
+<html>
+	<header>Write a complaint</header>
+	<p></p>
+	<form>
+		<mat-label>Company:</mat-label>
+			<mat-select [(value)] = "selected" [dataSource]="companyData" required>
+			<mat-option>{{company.name}}</mat-option>
+			</select>
+	<p></p>
+		<mat-label>Administrator:</mat-label>
+			<mat-select [(value)] = "selected" [dataSource]="adminData">
+			<mat-option>None</mat-option>
+			<mat-option>{{user.username}}</mat-option>
+			</select>
+	<p></p>
+		 <textarea matInput id="content" name="body" rows="10" cols="50" overflow-y: scroll [(ngModel)]="content">
+		 </textarea>
+	<p></p>
+    <button mat-flat-button (click)="submit()">Submit</button>
+	<p></p>
+    <button mat-flat-button (click)="cancel()">Cancel</button>
+	</form>
+
+</html>

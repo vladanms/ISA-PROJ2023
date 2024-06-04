@@ -1,1 +1,28 @@
-<p>schedule-pickup works!</p>
+<html>
+	<header>Product view</header>
+	<p></p>
+	<mat-label>{{product.name}}</mat-label>
+	<p></p>
+	<p></p>
+	
+	<table mat-table [dataSource]="scheduleData">
+	<ng-container matColumnDef="date">
+		<th mat-header-cell>Date</th>
+		<td mat-cell>{{scheduledPickup.date}}</td>
+	</ng-container>
+	<ng-container matColumnDef="startTime">
+		<th mat-header-cell>Starts at</th>
+		<td mat-cell>{{scheduledPickup.startTime}}</td>
+	</ng-container>
+	<ng-container matColumnDef="endTime">
+		<th mat-header-cell>Ends at</th>
+		<td mat-cell>{{scheduledPickup.endTime}}</td>
+	</ng-container>		
+	<ng-container matColumnDef="Schedule">
+        <th mat-header-cell>Schedule</th>
+        <td mat-cell><button mat-flat-button (click)="schedule(scheduledPickup.id)">Schedule</button></td>
+    </ng-container>
+	</table>
+	<p></p>
+	<button mat-flat-button (click)="back()">Back</button>
+</html>

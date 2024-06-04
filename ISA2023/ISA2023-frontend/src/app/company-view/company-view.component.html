@@ -1,1 +1,26 @@
-<p>company-view works!</p>
+<html>
+	<mat-label>{{company.name}}</mat-label>
+	<p></p>
+	<mat-label>Available products</mat-label>
+	<p></p>
+	<table mat-table [dataSource]="companyData">
+	<ng-container matColumnDef="name">
+        <th mat-header-cell>Name</th>
+        <td mat-cell>{{product.name}}</td>
+    </ng-container>
+	 <ng-container matColumnDef="availablePickups">
+        <th mat-header-cell>View</th>
+        <td mat-cell><button mat-flat-button (click)="view(company.id)">View</button></td>
+    </ng-container>
+	</table>
+	<p></p>
+	<p></p>
+	<form>
+		<mat-label>Filter products:</mat-label>
+		<p></p>	
+		<mat-label>Name:</mat-label>
+        <input matInput name="name" [(ngModel)]="name">
+		<p></p>
+        <button mat-flat-button (click)="Search()">Filter</button>
+    </form>
+</html>
