@@ -2,21 +2,38 @@ package model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class Complaint {
 
+	@Id
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
+	
+	@Column(name = "content", unique = false, nullable = true)
 	private String content;
+	
+	@Column(name = "response", unique = false, nullable = true)
 	private String response;
-	private Company company;
-	private User writer;
-	private User admin;
+	
+	@Column(name = "company", unique = false, nullable = true)
+	private String company;
+	
+	@Column(name = "writer", unique = false, nullable = false)
+	private String writer;
+	
+	@Column(name = "admint", unique = false, nullable = true)
+	private String admin;
+	
+	@Column(name = "content", unique = false, nullable = true)
 	private LocalDateTime time;
 	
 	public Complaint() {
 		super();
 	}
 
-	public Complaint(Long id, String content, Company company, User writer, User admin) {
+	public Complaint(Long id, String content, String company, String writer, String admin, String response) {
 		super();
 		if(id != null)
 		{
@@ -27,6 +44,7 @@ public class Complaint {
 		this.company = company;
 		this.writer = writer;
 		this.admin = admin;
+		this.response = response;
 		this.time = LocalDateTime.now();
 		}
 
@@ -48,11 +66,11 @@ public class Complaint {
 		this.time = time;
 	}
 
-	public User getAdmin() {
+	public String getAdmin() {
 		return admin;
 	}
 
-	public void setAdmin(User admin) {
+	public void setAdmin(String admin) {
 		this.admin = admin;
 	}
 
@@ -64,19 +82,19 @@ public class Complaint {
 		this.content = content;
 	}
 
-	public Company getCompany() {
+	public String getCompany() {
 		return company;
 	}
 
-	public void setCompany(Company company) {
+	public void setCompany(String company) {
 		this.company = company;
 	}
 
-	public User getWriter() {
+	public String getWriter() {
 		return writer;
 	}
 
-	public void setWriter(User writer) {
+	public void setWriter(String writer) {
 		this.writer = writer;
 	}
 
