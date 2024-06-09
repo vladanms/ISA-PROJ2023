@@ -118,5 +118,20 @@ public class UserService {
 		users.save(user);
 	}
 	
+	public String getType(String credentials)
+	{
+		if(users.findByEmail(credentials) != null)
+		{
+			return users.findByEmail(credentials).getType().toString();
+		}
+		else if(users.findByUsername(credentials) != null)
+		{
+			return users.findByUsername(credentials).getType().toString();
+		}
+		else
+		{
+		return "guest";
+		}
+	}
 	
 }

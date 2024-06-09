@@ -19,15 +19,28 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router, private toastr: ToastrService) { }
   
   
-  login()
-  {
-	   this.loginService.login(this.credentials, this.password).subscribe(
-        {
-          next: (res) => {
-          localStorage.setItem('currentUser', this.credentials);
-          },
-          error: (e) => {
-			  this.toastr.error("Invalid credentials", "Error");
+  	login()
+  	{
+	  	 this.loginService.login(this.credentials, this.password).subscribe(
+       	 {
+         	 next: (res) => {
+         	 localStorage.setItem('currentUser', this.credentials);
+         	 this.router.navigate([ '/' + this.loginService.getType() +'-homepage']);
+         	 },
+         	 error: (e) => {
+				  this.toastr.error("Invalid credentials", "Error");
           }
       });
-}
+	}	
+	
+	guestLogin()
+  	{
+	  	localStorage.setItem('currentUser', "");
+	 	 this.router.navigate(['/user-homepage']);
+  	};
+  	
+  	register()
+  	{
+		this.router.navigate(['/register']);
+	};
+  }

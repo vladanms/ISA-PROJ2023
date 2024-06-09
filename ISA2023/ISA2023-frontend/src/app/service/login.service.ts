@@ -21,5 +21,9 @@ export class LoginService {
 	  
 	      return this.http.post<any>(this.apiHost + 'user/login', loginDTO, {headers: this.headers});
 	  }
+	  	  
 	  
-	  }
+  getType(): Observable<string>{
+    return this.http.get<string>(this.apiHost + 'user/getType', {headers: this.headers})
+  }
+  }

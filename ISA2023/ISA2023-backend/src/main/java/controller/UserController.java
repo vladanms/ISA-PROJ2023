@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dto.LoginDTO;
@@ -84,6 +85,12 @@ public class UserController {
 	public void GuestLogin()
 	{
 		currentUser = null;
+	}
+	
+	@GetMapping("/getType")
+	public @ResponseBody String getUserType(@RequestBody String credentials)
+	{
+		return service.getType(credentials);
 	}
 	
 	@GetMapping("/verify")
