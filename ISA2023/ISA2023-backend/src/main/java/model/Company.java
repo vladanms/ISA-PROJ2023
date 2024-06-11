@@ -26,7 +26,7 @@ public class Company {
 	@Column(name = "closingHours", nullable = false)
 	private LocalTime closingHours;
 	
-	ArrayList<Equipment> availableEquimpent;
+	ArrayList<String> availableEquimpent;
 	ArrayList<ScheduledPickup> availablePickups;
 	ArrayList<User> admins;
 	
@@ -34,7 +34,7 @@ public class Company {
 		super();
 	}
 
-	public Company(Long id, String name, String address, LocalTime openingHours, LocalTime closingHours, ArrayList<Equipment> availableEquimpent,
+	public Company(Long id, String name, String address, LocalTime openingHours, LocalTime closingHours, ArrayList<String> availableEquimpent,
 			ArrayList<ScheduledPickup> availablePickups, ArrayList<User> admins) {
 		super();
 		if(id != null)
@@ -74,11 +74,11 @@ public class Company {
 		this.address = address;
 	}
 
-	public ArrayList<Equipment> getAvailableEquimpent() {
+	public ArrayList<String> getAvailableEquimpent() {
 		return availableEquimpent;
 	}
 
-	public void setAvailableEquimpent(ArrayList<Equipment> availableEquimpent) {
+	public void setAvailableEquimpent(ArrayList<String> availableEquimpent) {
 		this.availableEquimpent = availableEquimpent;
 	}
 

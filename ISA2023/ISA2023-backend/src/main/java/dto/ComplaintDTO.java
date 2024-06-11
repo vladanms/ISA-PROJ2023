@@ -18,7 +18,7 @@ public class ComplaintDTO {
 		super();
 	}
 
-	public ComplaintDTO(String content, String company, String writer, String admin) {
+	public ComplaintDTO(String company, String writer, String admin, String content) {
 		super();
 		this.content = content;
 		this.response = "";

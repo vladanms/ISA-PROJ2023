@@ -1,16 +1,24 @@
 package controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dto.ScheduledPickupDTO;
+import dto.ScheduledPickupViewDTO;
+import model.Company;
 import model.ScheduledPickup;
 import model.User;
+import service.CompanyService;
 import service.ScheduledPickupService;
 import service.UserService;
 
@@ -23,6 +31,9 @@ public class ScheduledPickupController {
 	
 	@Autowired
 	private ScheduledPickupService scheduledPickupService;
+	
+	@Autowired
+	private CompanyService companyService;
 	
 	private User currentUser;
 	
@@ -76,4 +87,75 @@ public class ScheduledPickupController {
 		
 	}
 
+	@GetMapping("/getFreeByCompany")
+	public @ResponseBody ArrayList<ScheduledPickupViewDTO> getFreeByCompany(@Param("companyName") String companyName)
+	{
+		ArrayList<ScheduledPickupViewDTO> res = new ArrayList<ScheduledPickupViewDTO>();
+		Company company = companyService.getByName(companyName);
+		
+		for(ScheduledPickup sp : scheduledPickupService.getByCompany(company))
+		{
+			if(sp.getUser() == null)
+			{
+				res.add(new ScheduledPickupViewDTO(
+						sp.getScheduledDate().toString(),
+						sp.getScheduledTimeStart().toString(),
+						sp.getScheduledTimeEnd().toString(),
+						sp.getCompany().getName(),
+						sp.getAdmin().getUsername(),
+						""
+						)
+				);
+			}
+		}		
+		return res;
+	}
+	
+	@GetMapping("/getFreeByCompanyEquipment")
+	public @ResponseBody ArrayList<ScheduledPickupViewDTO> getFreeByCompanyEquipment(@Param("companyName") String companyName, @Param("equipment") String equipment)
+	{
+		ArrayList<ScheduledPickupViewDTO> res = new ArrayList<ScheduledPickupViewDTO>();
+		Company company = companyService.getByName(companyName);
+		
+		for(ScheduledPickup sp : scheduledPickupService.getByCompany(company))
+		{
+			if(sp.getEquipment() == equipment)
+			{
+				res.add(new ScheduledPickupViewDTO(
+						sp.getScheduledDate().toString(),
+						sp.getScheduledTimeStart().toString(),
+						sp.getScheduledTimeEnd().toString(),
+						sp.getCompany().getName(),
+						sp.getAdmin().getUsername(),
+						""
+						)
+				);
+			}
+		}		
+		return res;
+	}
+	
+	@GetMapping("/getByUser")
+	public @ResponseBody ArrayList<ScheduledPickupViewDTO> getByUser(@Param("name") String name)
+	{
+		ArrayList<ScheduledPickupViewDTO> res = new ArrayList<ScheduledPickupViewDTO>();
+		User user = userService.getByUsername(name);
+		
+		for(ScheduledPickup sp : scheduledPickupService.getByUser(user))
+		{
+			if(sp.getUser() == null)
+			{
+				res.add(new ScheduledPickupViewDTO(
+						sp.getScheduledDate().toString(),
+						sp.getScheduledTimeStart().toString(),
+						sp.getScheduledTimeEnd().toString(),
+						sp.getCompany().getName(),
+						sp.getAdmin().getUsername(),
+						sp.getUser().getUsername()
+						)
+				);
+			}
+		}		
+		return res;
+	}
 }

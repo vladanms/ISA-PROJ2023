@@ -31,7 +31,7 @@ public class ScheduledPickup {
 	private int durationMinutes;
 	
 	private Company company;
-	private ArrayList<Equipment> equipment;
+	private String equipment;
 	private User admin;
 	private User user;
 	
@@ -40,7 +40,7 @@ public class ScheduledPickup {
 	}
 
 	public ScheduledPickup(Long id, LocalDate scheduledDate, LocalTime scheduledTimeStart, LocalTime scheduledTimeEnd,
-			 Company company, ArrayList<Equipment> equipment, User admin, User user) {
+			 Company company, String equipment, User admin, User user) {
 		super();
 		this.id = id;
 		this.scheduledDate = scheduledDate;
@@ -101,11 +101,11 @@ public class ScheduledPickup {
 		this.company = company;
 	}
 
-	public ArrayList<Equipment> getEquipment() {
+	public String getEquipment() {
 		return equipment;
 	}
 
-	public void setEquipment(ArrayList<Equipment> equipment) {
+	public void setEquipment(String equipment) {
 		this.equipment = equipment;
 	}
 
