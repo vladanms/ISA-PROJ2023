@@ -8,6 +8,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
@@ -15,8 +17,12 @@ public class ScheduledPickup {
 	
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
+	
+	@Column(name = "equipment", nullable = false)
+	private String equipment;
 	
 	@Column(name = "scheduledDate", nullable = false)
 	private LocalDate scheduledDate;
@@ -31,7 +37,6 @@ public class ScheduledPickup {
 	private int durationMinutes;
 	
 	private Company company;
-	private String equipment;
 	private User admin;
 	private User user;
 	

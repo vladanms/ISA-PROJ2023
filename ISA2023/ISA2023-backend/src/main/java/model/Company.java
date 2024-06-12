@@ -4,6 +4,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import model.Company;
@@ -11,6 +13,7 @@ import model.Company;
 public class Company {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 	

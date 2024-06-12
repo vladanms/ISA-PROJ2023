@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -51,6 +52,11 @@ public class ScheduledPickupService {
 	public ArrayList<ScheduledPickup> getByUser(User user)
 	{
         return scheduledPickups.findByUser(user);
+    }
+	
+	public Optional<ScheduledPickup> getById(Long id)
+	{
+        return scheduledPickups.findById(id);
     }
 	
 	public ArrayList<ScheduledPickup> getByCompany(Company company)

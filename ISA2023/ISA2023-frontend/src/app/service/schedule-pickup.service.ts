@@ -15,5 +15,19 @@ export class ScheduledPickupService {
 getScheduledPickups(company : string): Observable<ScheduledPickupDTO[]>{
 	 return this.http.get<ScheduledPickupDTO[]>(this.apiHost + 'scheduledPickup/getByCompany?company=' + company, {headers: this.headers});
 	 };
+	 
 
+schedule(id:number, username:string):Observable<any> {
+    let scheduledPickupMakeDTO = {
+      id: id,
+      username: username
+    }
+    return this.http.put<any>(this.apiHost + 'scheduledPickup/schedulePredefined', scheduledPickupMakeDTO, {headers: this.headers});
+  }
+  
+filter(equipment: String): Observable<ScheduledPickupDTO[]> {
+    if(equipment.length < 1)
+    {equipment = 'null';}
+	 return this.http.get<ScheduledPickupDTO[]>(this.apiHost + 'scheduledPickup/getFreeByCompanyEquipment?name=' + name + '?equipment=' + equipment, {headers: this.headers});
+  }
 }

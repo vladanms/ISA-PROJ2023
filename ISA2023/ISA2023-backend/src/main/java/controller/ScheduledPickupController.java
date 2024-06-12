@@ -1,12 +1,14 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dto.ScheduledPickupDTO;
+import dto.ScheduledPickupMakeDTO;
 import dto.ScheduledPickupViewDTO;
 import model.Company;
 import model.ScheduledPickup;
@@ -61,6 +64,23 @@ public class ScheduledPickupController {
 			}
 	}
 	
+	@PostMapping("/schedulePredefined") 
+	public ResponseEntity<ScheduledPickup> schedulePredefined(@RequestBody ScheduledPickupMakeDTO scheduledPickupMakeDTO)
+	{
+		Optional<ScheduledPickup> scheduledPickup = scheduledPickupService.getById(scheduledPickupMakeDTO.getId());
+		
+		//scheduledPickup.orElseThrow().setUser(userService.getByUsername(scheduledPickupViewDTO.getUser()));
+		
+		if(scheduledPickupService.schedule(userService.getByUsername(scheduledPickupMakeDTO.getUsername()), scheduledPickup.orElseThrow()))
+		{
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PutMapping("/cancel")
 	public ResponseEntity<ScheduledPickup> cancelPickup(@RequestBody ScheduledPickupDTO scheduledPickupDTO)
 	{
@@ -98,6 +118,8 @@ public class ScheduledPickupController {
 			if(sp.getUser() == null)
 			{
 				res.add(new ScheduledPickupViewDTO(
+						sp.getId(),
+						sp.getEquipment(),
 						sp.getScheduledDate().toString(),
 						sp.getScheduledTimeStart().toString(),
 						sp.getScheduledTimeEnd().toString(),
@@ -119,9 +141,11 @@ public class ScheduledPickupController {
 		
 		for(ScheduledPickup sp : scheduledPickupService.getByCompany(company))
 		{
-			if(sp.getEquipment() == equipment)
+			if(sp.getEquipment() == equipment || equipment == "null")
 			{
 				res.add(new ScheduledPickupViewDTO(
+						sp.getId(),
+						sp.getEquipment(),
 						sp.getScheduledDate().toString(),
 						sp.getScheduledTimeStart().toString(),
 						sp.getScheduledTimeEnd().toString(),
@@ -146,6 +170,8 @@ public class ScheduledPickupController {
 			if(sp.getUser() == null)
 			{
 				res.add(new ScheduledPickupViewDTO(
+						sp.getId(),
+						sp.getEquipment(),
 						sp.getScheduledDate().toString(),
 						sp.getScheduledTimeStart().toString(),
 						sp.getScheduledTimeEnd().toString(),
