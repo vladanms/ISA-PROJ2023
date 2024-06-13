@@ -65,6 +65,10 @@ public class ComplaintService {
 	       return complaints;
 	}
 	
+	public Complaint FindById(Long id)
+	{
+		return complaintRepository.findById(id).orElseThrow();
+	}
 	
 	
 

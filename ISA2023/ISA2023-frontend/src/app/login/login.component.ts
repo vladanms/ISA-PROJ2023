@@ -25,6 +25,17 @@ export class LoginComponent implements OnInit {
        	 {
          	 next: (res) => {
          	 localStorage.setItem('currentUser', this.credentials);
+         	 localStorage.setItem('currentUserType', JSON.stringify(this.loginService.getType()));
+         	 
+         	 if(localStorage.getItem('currentUserType') == 'admin')
+         	 {
+				localStorage.setItem('companyName', JSON.stringify(this.loginService.getAdminCompany()));	  
+			 }
+			 else
+			 {
+				 localStorage.setItem('companyName', '');
+			 }
+         	 
          	 this.router.navigate([ '/' + this.loginService.getType() +'-homepage']);
          	 },
          	 error: (e) => {
@@ -36,6 +47,7 @@ export class LoginComponent implements OnInit {
 	guestLogin()
   	{
 	  	localStorage.setItem('currentUser', "");
+	  	localStorage.setItem('currentUserType', "guest")
 	 	 this.router.navigate(['/user-homepage']);
   	};
   	

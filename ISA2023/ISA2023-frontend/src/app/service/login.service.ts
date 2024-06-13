@@ -24,6 +24,10 @@ export class LoginService {
 	  	  
 	  
   getType(): Observable<string>{
-    return this.http.get<string>(this.apiHost + 'user/getType', {headers: this.headers})
+    return this.http.get<string>(this.apiHost + 'user/getType?credentials=' + localStorage.getItem('currentUser'), {headers: this.headers})
+  }
+  
+  getAdminCompany(): Observable<string>{
+	  return this.http.get<string>(this.apiHost + 'user/getCompanyByAdmin?credentials=' + localStorage.getItem('currentUser'), {headers: this.headers})
   }
   }

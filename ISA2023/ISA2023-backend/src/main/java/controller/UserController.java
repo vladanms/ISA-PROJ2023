@@ -19,7 +19,9 @@ import dto.LoginDTO;
 import dto.UserDTO;
 import model.UserType;
 import net.bytebuddy.utility.RandomString;
+import model.Company;
 import model.User;
+import service.CompanyService;
 import service.UserService;
 
 @RestController
@@ -29,6 +31,9 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	private User currentUser = new User();
+	
+	@Autowired
+	private CompanyService companyService;
 	
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@RequestBody UserDTO userDTO) throws MessagingException, UnsupportedEncodingException
@@ -91,6 +96,22 @@ public class UserController {
 	public @ResponseBody String getUserType(@RequestBody String credentials)
 	{
 		return service.getType(credentials);
+	}
+	
+	@GetMapping("/getAdminCompany")
+	public @ResponseBody String getAdminCompany(@RequestBody String admin)
+	{
+		for(Company c : companyService.getAll())
+		{
+			for(User a : c.getAdmins())
+			{
+				if(a.getUsername() == admin || a.getEmail() == admin)
+				{
+					return c.getName();
+				}
+			}
+		}
+		return "";
 	}
 	
 	@GetMapping("/verify")

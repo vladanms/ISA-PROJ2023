@@ -16,15 +16,14 @@ export class HomepageUserService {
   	public companyName: string = JSON.parse(localStorage.getItem('companyName') || '{}')
   
  	
-	getCompanies(): Observable<CompanyDTO[]> {
+	public getCompanies(): Observable<CompanyDTO[]> {
     return this.http.get<CompanyDTO[]>(this.apiHost + 'company/getAll', {headers: this.headers});
   }
 	
-	filter(equipment: String): Observable<CompanyDTO[]> {
+	public filter(equipment: String): Observable<CompanyDTO[]> {
     if(equipment.length < 1)
     {equipment = 'null';}
 	 return this.http.get<CompanyDTO[]>(this.apiHost + 'company/getByName?companyName=' + this.companyName, {headers: this.headers});
   }
-	
 	
 }

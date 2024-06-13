@@ -118,6 +118,20 @@ public class UserService {
 		users.save(user);
 	}
 	
+	public String getCredentialsEmail(String credentials)
+	{
+    	if(users.findByEmail(credentials) != null)
+    	{
+    		return credentials;
+    	}
+    	else if(users.findByUsername(credentials) != null)
+    	{
+    		return users.findByUsername(credentials).getEmail();
+    	}
+    	else
+    		return null;
+	}
+	
 	public String getType(String credentials)
 	{
 		if(users.findByEmail(credentials) != null)

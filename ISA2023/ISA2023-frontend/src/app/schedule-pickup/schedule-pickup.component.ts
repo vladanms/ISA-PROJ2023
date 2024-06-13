@@ -45,4 +45,9 @@ export class SchedulePickupComponent {
 	{
 		this.scheduledPickupService.schedule(id, this.username);
 	}
+	
+public back(){
+	localStorage.setItem('companyName', '')
+	this.router.navigate(['/homepage-user']);
+}
 }

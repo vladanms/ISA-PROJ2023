@@ -26,10 +26,10 @@ public class Complaint {
 	@Column(name = "writer", unique = false, nullable = false)
 	private String writer;
 	
-	@Column(name = "admint", unique = false, nullable = true)
+	@Column(name = "admin", unique = false, nullable = true)
 	private String admin;
 	
-	@Column(name = "content", unique = false, nullable = true)
+	@Column(name = "time", unique = false, nullable = true)
 	private LocalDateTime time;
 	
 	public Complaint() {

@@ -1,6 +1,9 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dto.ComplaintDTO;
+import dto.ComplaintViewDTO;
+import dto.ReplyDTO;
 import model.Complaint;
 import model.User;
 import service.CompanyService;
@@ -47,31 +52,129 @@ public class ComplaintController {
     }
     
     @PutMapping("/reply")
-    public ResponseEntity<Complaint> replyComplaint(@RequestBody ComplaintDTO complaintDTO)
+    public ResponseEntity<Complaint> replyComplaint(@RequestBody ReplyDTO replyDTO)
     {
-        if(complaintService.writeComplaint(complaintDTO.getWriter(), complaintDTO.getCompany(), 
+    /*    if(complaintService.writeComplaint(complaintDTO.getWriter(), complaintDTO.getCompany(), 
         		complaintDTO.getAdmin(), complaintDTO.getContent(), complaintDTO.getResponse())){
 			return new ResponseEntity<>(HttpStatus.OK);
+		}*/
+    	Complaint c = complaintService.FindById(replyDTO.getId());
+    	try {
+			complaintService.writeReply(c, replyDTO.getResponse(), userService.getCredentialsEmail(replyDTO.getCredentials()));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
+    @GetMapping("/getById")
+    public @ResponseBody ComplaintViewDTO getById(@Param("id") Long id)
+    {
+    	Complaint c = complaintService.FindById(id);
+    	
+    	return (new ComplaintViewDTO(
+    					c.getId(),
+    					c.getContent(),
+    					c.getResponse(),
+    					c.getCompany(),
+    					c.getWriter(),
+    					c.getAdmin(),
+    					c.getTime().toString()
+    				)
+    			);
+
     }
     
     @GetMapping("/getByWriter")
-    public @ResponseBody ArrayList<Complaint> getByWriter()
+    public @ResponseBody ArrayList<ComplaintViewDTO> getByWriter(@Param("writer") String writer)
     {
-    	return complaintService.FindByWriter(currentUser.getUsername());
+    	ArrayList<ComplaintViewDTO> res = new ArrayList<ComplaintViewDTO>();
+    	
+    	for( Complaint c: complaintService.FindByWriter(writer))
+    	{
+    		res.add(new ComplaintViewDTO(
+    					c.getId(),
+    					c.getContent(),
+    					c.getResponse(),
+    					c.getCompany(),
+    					c.getWriter(),
+    					c.getAdmin(),
+    					c.getTime().toString()
+    				)
+    			);
+    	}
+    	return res;
     }
     
     @GetMapping("/getByAdmin")
-    public @ResponseBody ArrayList<Complaint> getByAdmin(@Param("admin") String admin)
+    public @ResponseBody ArrayList<ComplaintViewDTO> getByAdmin(@Param("admin") String admin)
     {
-    	return complaintService.FindByWriter(admin);
+    ArrayList<ComplaintViewDTO> res = new ArrayList<ComplaintViewDTO>();
+    	
+    	for( Complaint c: complaintService.FindByAdmin(admin))
+    	{
+    		res.add(new ComplaintViewDTO(
+    					c.getId(),
+    					c.getContent(),
+    					c.getResponse(),
+    					c.getCompany(),
+    					c.getWriter(),
+    					c.getAdmin(),
+    					c.getTime().toString()
+    				)
+    			);
+    	}
+    	return res;
     }
     
     @GetMapping("/getByCompany")
-    public @ResponseBody ArrayList<Complaint> getByCompany(@Param("company") String company)
+    public @ResponseBody ArrayList<ComplaintViewDTO> getByCompany(@Param("company") String company)
     {
-    	return complaintService.FindByWriter(company);
+        ArrayList<ComplaintViewDTO> res = new ArrayList<ComplaintViewDTO>();
+    	
+    	for( Complaint c: complaintService.FindByCompany(company))
+    	{
+    		res.add(new ComplaintViewDTO(
+    					c.getId(),
+    					c.getContent(),
+    					c.getResponse(),
+    					c.getCompany(),
+    					c.getWriter(),
+    					c.getAdmin(),
+    					c.getTime().toString()
+    				)
+    			);
+    	}
+    	return res;
+    }
+    
+    @GetMapping("/getByCompanyAdmin")
+    public @ResponseBody ArrayList<ComplaintViewDTO> getByCompany(@Param("company") String company, @Param("admin") String admin)
+    {
+        ArrayList<ComplaintViewDTO> res = new ArrayList<ComplaintViewDTO>();
+    	
+    	for( Complaint c: complaintService.FindByCompany(company))
+    	{
+    		if(c.getAdmin() == admin) {
+    		res.add(new ComplaintViewDTO(
+    					c.getId(),
+    					c.getContent(),
+    					c.getResponse(),
+    					c.getCompany(),
+    					c.getWriter(),
+    					c.getAdmin(),
+    					c.getTime().toString()
+    				)
+    			);
+    		}
+    	}
+    	return res;
     }
     
     }
