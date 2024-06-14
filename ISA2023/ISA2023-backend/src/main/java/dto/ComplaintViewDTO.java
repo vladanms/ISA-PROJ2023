@@ -2,7 +2,7 @@ package dto;
 
 public class ComplaintViewDTO {
 
-	private Long id;
+	private String id;
 	private String content;
 	private String response;
 	private String company;
@@ -14,7 +14,7 @@ public class ComplaintViewDTO {
 	public ComplaintViewDTO() {
 		super();
 	}
-	public ComplaintViewDTO(Long id, String content, String response, String company, String writer, String admin,
+	public ComplaintViewDTO(String id, String content, String response, String company, String writer, String admin,
 			String time) {
 		super();
 		this.id = id;
@@ -25,10 +25,10 @@ public class ComplaintViewDTO {
 		this.admin = admin;
 		this.time = time;
 	}
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getContent() {

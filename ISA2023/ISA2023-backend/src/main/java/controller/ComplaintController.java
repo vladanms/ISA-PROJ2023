@@ -79,7 +79,7 @@ public class ComplaintController {
     	Complaint c = complaintService.FindById(id);
     	
     	return (new ComplaintViewDTO(
-    					c.getId(),
+    					c.getId().toString(),
     					c.getContent(),
     					c.getResponse(),
     					c.getCompany(),
@@ -99,7 +99,7 @@ public class ComplaintController {
     	for( Complaint c: complaintService.FindByWriter(writer))
     	{
     		res.add(new ComplaintViewDTO(
-    					c.getId(),
+    					c.getId().toString(),
     					c.getContent(),
     					c.getResponse(),
     					c.getCompany(),
@@ -120,7 +120,7 @@ public class ComplaintController {
     	for( Complaint c: complaintService.FindByAdmin(admin))
     	{
     		res.add(new ComplaintViewDTO(
-    					c.getId(),
+    					c.getId().toString(),
     					c.getContent(),
     					c.getResponse(),
     					c.getCompany(),
@@ -141,7 +141,7 @@ public class ComplaintController {
     	for( Complaint c: complaintService.FindByCompany(company))
     	{
     		res.add(new ComplaintViewDTO(
-    					c.getId(),
+    					c.getId().toString(),
     					c.getContent(),
     					c.getResponse(),
     					c.getCompany(),
@@ -163,7 +163,7 @@ public class ComplaintController {
     	{
     		if(c.getAdmin() == admin) {
     		res.add(new ComplaintViewDTO(
-    					c.getId(),
+    					c.getId().toString(),
     					c.getContent(),
     					c.getResponse(),
     					c.getCompany(),

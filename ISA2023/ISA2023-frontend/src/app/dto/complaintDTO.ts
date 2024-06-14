@@ -1,5 +1,5 @@
 export class ComplaintDTO{
-	id!: number
+	id!: string
 	content!: string
 	response!: string
 	company!: string

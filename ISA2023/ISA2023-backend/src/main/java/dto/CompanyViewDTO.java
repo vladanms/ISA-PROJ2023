@@ -2,7 +2,7 @@ package dto;
 
 public class CompanyViewDTO {
 
-		private Long id;
+		private String id;
 		private String name;
 		private String address;
 		private String openingTime;
@@ -12,7 +12,7 @@ public class CompanyViewDTO {
 			super();
 		}
 
-		public CompanyViewDTO(Long id, String name, String address, String openingTime, String closingTime) {
+		public CompanyViewDTO(String id, String name, String address, String openingTime, String closingTime) {
 			super();
 			this.id = id;
 			this.name = name;
@@ -21,11 +21,11 @@ public class CompanyViewDTO {
 			this.closingTime = closingTime;
 		}
 
-		public Long getId() {
+		public String getId() {
 			return id;
 		}
 
-		public void setId(Long id) {
+		public void setId(String id) {
 			this.id = id;
 		}
 

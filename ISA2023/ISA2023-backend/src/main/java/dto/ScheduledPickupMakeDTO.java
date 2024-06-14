@@ -2,10 +2,10 @@ package dto;
 
 public class ScheduledPickupMakeDTO {
 
-	private Long id;
+	private String id;
 	private String username;
 	
-	public ScheduledPickupMakeDTO(Long id, String username) {
+	public ScheduledPickupMakeDTO(String id, String username) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -13,10 +13,10 @@ public class ScheduledPickupMakeDTO {
 	public ScheduledPickupMakeDTO() {
 		super();
 	}
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getUsername() {

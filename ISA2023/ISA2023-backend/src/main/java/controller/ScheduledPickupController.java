@@ -67,7 +67,7 @@ public class ScheduledPickupController {
 	@PostMapping("/schedulePredefined") 
 	public ResponseEntity<ScheduledPickup> schedulePredefined(@RequestBody ScheduledPickupMakeDTO scheduledPickupMakeDTO)
 	{
-		Optional<ScheduledPickup> scheduledPickup = scheduledPickupService.getById(scheduledPickupMakeDTO.getId());
+		Optional<ScheduledPickup> scheduledPickup = scheduledPickupService.getById(Long.parseLong(scheduledPickupMakeDTO.getId()));
 		
 		//scheduledPickup.orElseThrow().setUser(userService.getByUsername(scheduledPickupViewDTO.getUser()));
 		
@@ -82,19 +82,20 @@ public class ScheduledPickupController {
 	}
 	
 	@PutMapping("/cancel")
-	public ResponseEntity<ScheduledPickup> cancelPickup(@RequestBody ScheduledPickupDTO scheduledPickupDTO)
-	{
-		ScheduledPickup pickup = new ScheduledPickup();
-		
-		pickup.setAdmin(scheduledPickupDTO.getAdmin());
+	public ResponseEntity<ScheduledPickup> cancelPickup(@RequestBody ScheduledPickupMakeDTO scheduledPickupMakeDTO)
+	{		
+		ScheduledPickup scheduledPickup = scheduledPickupService.getById(Long.parseLong(scheduledPickupMakeDTO.getId())).orElseThrow();
+
+		/*pickup.setAdmin(scheduledPickupDTO.getAdmin());
 		pickup.setCompany(scheduledPickupDTO.getCompany());
 		pickup.setDurationMinutes(scheduledPickupDTO.getDurationMinutes());
 		pickup.setEquipment(scheduledPickupDTO.getEquipment());
 		pickup.setScheduledDate(scheduledPickupDTO.getScheduledDate());
 		pickup.setScheduledTimeStart(scheduledPickupDTO.getScheduledTimeStart());
-		pickup.setScheduledTimeEnd(scheduledPickupDTO.getScheduledTimeEnd());
+		pickup.setScheduledTimeEnd(scheduledPickupDTO.getScheduledTimeEnd());*/
 		
-		switch(scheduledPickupService.cancel(currentUser, pickup))
+		switch(scheduledPickupService.cancel(userService.getByUsername(scheduledPickupMakeDTO.getUsername()), 
+				scheduledPickup))
 		{	
 		case 0:
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -118,7 +119,7 @@ public class ScheduledPickupController {
 			if(sp.getUser() == null)
 			{
 				res.add(new ScheduledPickupViewDTO(
-						sp.getId(),
+						sp.getId().toString(),
 						sp.getEquipment(),
 						sp.getScheduledDate().toString(),
 						sp.getScheduledTimeStart().toString(),
@@ -144,7 +145,7 @@ public class ScheduledPickupController {
 			if(sp.getEquipment() == equipment || equipment == "null")
 			{
 				res.add(new ScheduledPickupViewDTO(
-						sp.getId(),
+						sp.getId().toString(),
 						sp.getEquipment(),
 						sp.getScheduledDate().toString(),
 						sp.getScheduledTimeStart().toString(),
@@ -170,7 +171,7 @@ public class ScheduledPickupController {
 			if(sp.getUser() == null)
 			{
 				res.add(new ScheduledPickupViewDTO(
-						sp.getId(),
+						sp.getId().toString(),
 						sp.getEquipment(),
 						sp.getScheduledDate().toString(),
 						sp.getScheduledTimeStart().toString(),

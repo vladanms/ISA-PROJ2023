@@ -34,10 +34,17 @@ export class HomepageUserComponent implements OnInit {
     })
   }
   
-  public view(companyName: string)
+  public mySchedules()
   {
-	  localStorage.setItem('companyName', companyName);
-	  this.router.navigate(['/schedule-pickup']);
+	  this.router.navigate(['/user-schedule']);
+  }
+  
+    public logout()
+  {
+	  localStorage.setItem('companyName', '');
+	  localStorage.setItem('currentUser', '');
+	  localStorage.setItem('currentUserType', '');
+	  this.router.navigate(['/login']);
   }
 	
 }

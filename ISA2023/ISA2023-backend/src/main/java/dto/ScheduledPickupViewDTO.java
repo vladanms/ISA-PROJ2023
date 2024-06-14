@@ -2,7 +2,7 @@ package dto;
 
 public class ScheduledPickupViewDTO {
 
-	private Long id;
+	private String id;
 	private String equipment;
 	private String date;
 	private String startTime;
@@ -19,7 +19,7 @@ public class ScheduledPickupViewDTO {
 
 
 
-	public ScheduledPickupViewDTO(Long id, String equipment, String date, String startTime, String endTime, String company, String admin,
+	public ScheduledPickupViewDTO(String id, String equipment, String date, String startTime, String endTime, String company, String admin,
 			String user) {
 		super();
 		this.id = id;
@@ -46,13 +46,13 @@ public class ScheduledPickupViewDTO {
 
 
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
 
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

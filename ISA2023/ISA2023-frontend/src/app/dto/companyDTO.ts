@@ -1,5 +1,5 @@
 export class CompanyDTO{
-	id!: number
+	id!: string
 	name!: string
 	address!: string
 	openingHours!: string

@@ -2,6 +2,9 @@
     <header>Home</header>
 	<p></p>
 	<p></p>
+	<mat-label>View your schedule:</mat-label>
+	<button mat-flat-button (click)="mySchedules()">View</button>
+	<p></p>
 	<mat-label>Companies</mat-label>
 	<p></p>
 	<table mat-table [dataSource]="companyData">
@@ -32,6 +35,7 @@
     </form>
 		<p></p>
 		<p></p>
+	<button mat-flat-button (click)="logout()">Logout</button>
 <!--	
 	<mat-label>Products</mat-label>
 	<p></p>

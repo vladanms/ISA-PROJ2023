@@ -30,7 +30,7 @@ public class CompanyController {
 		{
 			res.add(
 					new CompanyViewDTO(
-							c.getId(),
+							c.getId().toString(),
 							c.getName(),
 							c.getAddress(),
 							c.getOpeningHours().toString(),
@@ -51,7 +51,7 @@ public class CompanyController {
 			if(c.getName().contains(name) || name == "null") {
 			res.add(
 					new CompanyViewDTO(
-							c.getId(),
+							c.getId().toString(),
 							c.getName(),
 							c.getAddress(),
 							c.getOpeningHours().toString(),

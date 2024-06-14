@@ -1,5 +1,5 @@
 export class ScheduledPickupDTO{
-	id!: number
+	id!: string
 	date!: string
 	equipment!: string
 	startTime!: string

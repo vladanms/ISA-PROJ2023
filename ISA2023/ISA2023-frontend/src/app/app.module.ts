@@ -14,6 +14,7 @@ import { EquipmentViewComponent } from './equipment-view/equipment-view.componen
 import { HomepageAdminComponent } from './homepage-admin/homepage-admin.component';
 import { HomepageUserComponent } from './homepage-user/homepage-user.component';
 import { UserComplaintsComponent } from './user-complaints/user-complaints.component';
+import { UserScheduleComponent } from './user-schedule/user-schedule.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UserComplaintsComponent } from './user-complaints/user-complaints.compo
     EquipmentViewComponent,
     HomepageAdminComponent,
     HomepageUserComponent,
-    UserComplaintsComponent
+    UserComplaintsComponent,
+    UserScheduleComponent
   ],
   imports: [
     BrowserModule,
