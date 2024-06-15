@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ViewComplaintService {
-	  apiHost: string = 'http://localhost:8080/';
+	  apiHost: string = 'http://localhost:8091/';
 	  headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 	  
 	  constructor(private http: HttpClient) { }

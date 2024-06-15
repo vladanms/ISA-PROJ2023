@@ -58,9 +58,9 @@ public class ComplaintController {
         		complaintDTO.getAdmin(), complaintDTO.getContent(), complaintDTO.getResponse())){
 			return new ResponseEntity<>(HttpStatus.OK);
 		}*/
-    	Complaint c = complaintService.FindById(replyDTO.getId());
+    	Complaint c = complaintService.FindById(Long.parseLong(replyDTO.getId()));
     	try {
-			complaintService.writeReply(c, replyDTO.getResponse(), userService.getCredentialsEmail(replyDTO.getCredentials()));
+			complaintService.writeReply(c, replyDTO.getResponse(), userService.getByUsername(c.getWriter()).getEmail());
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

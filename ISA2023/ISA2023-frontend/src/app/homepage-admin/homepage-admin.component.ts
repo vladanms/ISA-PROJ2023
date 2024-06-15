@@ -40,7 +40,7 @@ export class HomepageAdminComponent implements OnInit {
   	{
 		if(this.id != 0)
 		{
-			
+			this.homepageAdminService.Reply(this.id, this.response);
 		}
   	}
 }

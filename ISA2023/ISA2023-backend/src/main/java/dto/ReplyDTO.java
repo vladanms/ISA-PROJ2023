@@ -2,26 +2,24 @@ package dto;
 
 public class ReplyDTO {
 
-	private Long id;
+	private String id;
 	private String response;	
-	private String credentials;
 	
 	public ReplyDTO() {
 		super();
 	}
 
-	public ReplyDTO(Long id, String response, String credentials) {
+	public ReplyDTO(String id, String response) {
 		super();
 		this.id = id;
 		this.response = response;
-		this.credentials = credentials;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -31,14 +29,6 @@ public class ReplyDTO {
 
 	public void setResponse(String response) {
 		this.response = response;
-	}
-
-	public String getCredentials() {
-		return credentials;
-	}
-
-	public void setCredentials(String email) {
-		this.credentials = email;
 	}
 	
 	

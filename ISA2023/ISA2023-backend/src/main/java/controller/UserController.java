@@ -75,11 +75,11 @@ public class UserController {
 
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO){
-		if(service.login(loginDTO.getCredentials(), loginDTO.getPassword()) == "username") {
+		if(service.login(loginDTO.getCredentials(), loginDTO.getCredentials()) == "username") {
 			currentUser = service.getByUsername(loginDTO.getCredentials());
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		if(service.login(loginDTO.getCredentials(), loginDTO.getPassword()) == "email") {
+		if(service.login(loginDTO.getCredentials(), loginDTO.getCredentials()) == "email") {
 			currentUser = service.getByEmail(loginDTO.getCredentials());
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
@@ -98,6 +98,17 @@ public class UserController {
 		return service.getType(credentials);
 	}
 	
+	@GetMapping("/verifyType")
+	public @ResponseBody Boolean verifyType(@RequestBody String type)
+	{
+		if(service.checkType(currentUser.getUsername(), type))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	
 	@GetMapping("/getAdminCompany")
 	public @ResponseBody String getAdminCompany(@RequestBody String admin)
 	{
@@ -113,6 +124,7 @@ public class UserController {
 		}
 		return "";
 	}
+
 	
 	@GetMapping("/verify")
 	public Boolean verify(@Param("verification") String verification) {

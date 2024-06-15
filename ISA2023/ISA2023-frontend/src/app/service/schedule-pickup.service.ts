@@ -7,7 +7,7 @@ import { ScheduledPickupDTO } from '../dto/scheduled-pickupDTO';
   providedIn: 'root'
 })
 export class ScheduledPickupService {
-	  apiHost: string = 'http://localhost:8080/';
+	  apiHost: string = 'http://localhost:8091/';
 	  headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 	  
   constructor(private http: HttpClient) { }	  

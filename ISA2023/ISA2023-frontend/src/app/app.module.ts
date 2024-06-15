@@ -15,6 +15,8 @@ import { HomepageAdminComponent } from './homepage-admin/homepage-admin.componen
 import { HomepageUserComponent } from './homepage-user/homepage-user.component';
 import { UserComplaintsComponent } from './user-complaints/user-complaints.component';
 import { UserScheduleComponent } from './user-schedule/user-schedule.component';
+import { TypeAuthorizationGuard } from './guard/type-authorization.guard';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -30,13 +32,14 @@ import { UserScheduleComponent } from './user-schedule/user-schedule.component';
     HomepageAdminComponent,
     HomepageUserComponent,
     UserComplaintsComponent,
-    UserScheduleComponent
+    UserScheduleComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [TypeAuthorizationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

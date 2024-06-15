@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javax.persistence.criteria.Order;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 
@@ -31,6 +33,40 @@ public class ScheduledPickupService {
 		scheduledPickup.setUser(user);
 		scheduledPickups.save(scheduledPickup);
 		return true;
+	}
+	
+	public boolean addAdmin(ScheduledPickup scheduledPickup, Company company, ArrayList<User> admins)
+	{
+		boolean free = true;
+		for(User a : admins)
+		{
+			for(ScheduledPickup sp: scheduledPickups.findByCompany(company))
+			{
+				if(sp.getAdmin() == a && sp.getScheduledTimeEnd().isAfter(scheduledPickup.getScheduledTimeStart()))
+				{
+					free = false;
+				}
+			}
+			if(free)
+			{
+				scheduledPickup.setAdmin(a);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean freeExpired(ScheduledPickup scheduledPickup)
+	{
+		if(scheduledPickup.getAdmin() != null)
+		{
+			if(scheduledPickup.getScheduledTimeEnd().isBefore(LocalTime.now()))
+			{
+				scheduledPickup.setAdmin(null);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public int cancel(User user, ScheduledPickup scheduledPickup)

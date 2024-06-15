@@ -1,6 +1,8 @@
 package service;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -9,11 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
+import com.google.zxing.WriterException;
+
 import dto.UserDTO;
+import model.Company;
 import model.ScheduledPickup;
 import model.User;
 import model.UserType;
 import repository.UserRepository;
+import service.QRService;
 
 public class UserService {
 	
@@ -21,6 +27,8 @@ public class UserService {
 	private UserRepository users;
 	@Autowired
 	private JavaMailSender sender;
+	@Autowired
+	private QRService QRservice;
 	
 	public String register(User user) throws MessagingException, UnsupportedEncodingException {
 		User toRegister = users.findByEmail(user.getEmail());
@@ -68,6 +76,33 @@ public class UserService {
 		return null;
 	}
 	
+	public Boolean checkType(String type, String username)
+	{		
+	    if(username == null)
+		{
+			return false;
+		}
+		if(users.findByUsername(username).getType().toString() != null)
+		{
+			if(users.findByUsername(username).getType().toString() == type)
+			{
+			return true;
+			}else
+			return false;
+		}
+		if(users.findByEmail(username).getType().toString() != null)
+		{
+		{
+			if(users.findByEmail(username).getType().toString() == type)
+			{
+			return true;
+			}else
+			return false;
+		}
+		}
+		return false;
+	}
+	
 	public Boolean verify(String authorization)
 	{
 		User user = users.findByVerification(authorization);
@@ -78,9 +113,10 @@ public class UserService {
 		user.setType(UserType.Registered);
 		users.save(user);
 		return true;	
+		
 	}
 	
-	public void emailVerification(String email) throws UnsupportedEncodingException, MessagingException
+	public void emailVerification(String email) throws MessagingException, WriterException, IOException
 	{
 		MimeMessage message = sender.createMimeMessage();
 	    MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -90,9 +126,13 @@ public class UserService {
 	    helper.setSubject("Verify your account");
 	    helper.setText("Hello<br><br>,"
 	    		+ "To verify your account, click the following link:<br>"
-	    		+ "http://localhost:8080/user/verify?verification=" + users.findByEmail(email).getVerification(),
+	    		+ "http://localhost:8080/user/verify?verification=" + users.findByEmail(email).getVerification()
+	    		+ "or scan the attached code"
+	    		+ "<img src=\""
+	    		+ QRservice.createQRImage("http://localhost:8080/user/verify?verification=" + users.findByEmail(email).getVerification())
+	    		+ "\">",
 	    		true
-	    		);
+	    		);	    
 	    sender.send(message);
 	}
 	
@@ -146,6 +186,11 @@ public class UserService {
 		{
 		return "guest";
 		}
+	}
+	
+	public ArrayList<User> getAdmins(Company company)
+	{
+		return company.getAdmins();
 	}
 	
 }
