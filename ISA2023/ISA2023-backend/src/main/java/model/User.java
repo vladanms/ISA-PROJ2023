@@ -46,10 +46,10 @@ public class User {
 	private String country;
 	
 	@Column(name = "rewardPoints", nullable = false)
-	private int penaltyPoints;
+	private int rewardPoints;
 	
 	@Column(name = "penaltyPoints", nullable = false)
-	private int rewardPoints;
+	private int penaltyPoints;
 	
 	@Column(name = "userType", nullable = false)
 	private UserType type;

@@ -4,7 +4,7 @@ import { TypeAuthorizationGuard } from './guard/type-authorization.guard';
 import { HomepageUserComponent } from './homepage-user/homepage-user.component';
 import { CompanyViewComponent } from './company-view/company-view.component';
 import { UserScheduleComponent } from './user-schedule/user-schedule.component';
-import { ReplyComplaintComponent } from './reply-complaint/reply-complaint.component';
+//import { ReplyComplaintComponent } from './reply-complaint/reply-complaint.component';
 import { UserComplaintsComponent } from './user-complaints/user-complaints.component';
 import { HomepageAdminComponent } from './homepage-admin/homepage-admin.component';
 
@@ -18,8 +18,6 @@ const routes: Routes = [
 	 canActivate: [TypeAuthorizationGuard], data: { requiredRole: 'Registered' } },
 	{ path: '/user-complaints', component: UserComplaintsComponent,
 	 canActivate: [TypeAuthorizationGuard], data: { requiredRole: 'Registered' } },
-	{ path: '/reply-complaint', component: ReplyComplaintComponent,
-	 canActivate: [TypeAuthorizationGuard], data: { requiredRole: 'Admin' } },
 	{ path: '/homepage-admin', component: HomepageAdminComponent,
 	 canActivate: [TypeAuthorizationGuard], data: { requiredRole: 'Admin' } }
 ];

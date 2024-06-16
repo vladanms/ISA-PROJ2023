@@ -17,7 +17,7 @@ public class CompanyDTO {
 	private LocalTime openingHours;
 	private LocalTime closingHours;
 	ArrayList<Equipment> availableEquimpent;
-	ArrayList<ScheduledPickup> availablePickups;
+	//ArrayList<ScheduledPickup> availablePickups;
 	ArrayList<User> admins;
 	
 	public CompanyDTO() {
@@ -25,14 +25,14 @@ public class CompanyDTO {
 	}
 
 	public CompanyDTO(Long id, String name, String address, LocalTime openingHours, LocalTime closingHours, ArrayList<Equipment> availableEquimpent,
-			ArrayList<ScheduledPickup> availablePickups, ArrayList<User> admins) {
+			 ArrayList<User> admins) {
 		super();
 		this.name = name;
 		this.address = address;
 		this.openingHours = openingHours;
 		this.closingHours = closingHours;
 		this.availableEquimpent = availableEquimpent;
-		this.availablePickups = availablePickups;
+		//this.availablePickups = availablePickups;
 		this.admins = admins;
 	}
 
@@ -60,13 +60,13 @@ public class CompanyDTO {
 		this.availableEquimpent = availableEquimpent;
 	}
 
-	public ArrayList<ScheduledPickup> getAvailablePickups() {
+/*	public ArrayList<ScheduledPickup> getAvailablePickups() {
 		return availablePickups;
 	}
 
 	public void setAvailablePickups(ArrayList<ScheduledPickup> availablePickups) {
 		this.availablePickups = availablePickups;
-	}
+	}*/
 
 	public ArrayList<User> getAdmins() {
 		return admins;

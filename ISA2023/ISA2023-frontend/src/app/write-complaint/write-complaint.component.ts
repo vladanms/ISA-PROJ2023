@@ -10,22 +10,41 @@ import { WriteComplaintService } from '../service/write-complaint.service';
 })
 export class WriteComplaintComponent {
 
-	company: string = ""
-	admin: string = ""
-	content: string = ""
+	public company: string = ""
+	public admin: string = ""
+	public content: string = ""
+	public companyData: string[] = [];
+	public adminData: string[] = [];
+	public user: string = JSON.stringify(localStorage.getItem('currentUser'));
 
-	 ngOnInit(): void {
-  }
-
- constructor(private complaintService: WriteComplaintService, private router: Router, private toastr: ToastrService) { }
+ constructor(private writeComplaintService: WriteComplaintService, private router: Router, private toastr: ToastrService) { }
  
- 	write()
+ 	 ngOnInit(): void {
+	  this.writeComplaintService.getCompanies(this.user).subscribe(res => {
+      this.companyData = res;;
+  		})
+  }
+ 
+ 	submit()
  	{
 		 if(this.company == "")
 		 {
 			 this.toastr.error("You must select a company you did business with", "Error");
 		 }
-		 this.complaintService.writeComplaint(this.company,
+		 this.writeComplaintService.writeComplaint(this.company,
 		 this.admin, this.content);
+	}
+	
+	getAdmins()
+	{
+	  this.writeComplaintService.getAdmins(this.user, this.company).subscribe(res => {
+      this.adminData = res;;
+  		})
+	}
+
+	
+	cancel()
+	{
+		this.router.navigate(['/user-homepage']);
 	}
 }

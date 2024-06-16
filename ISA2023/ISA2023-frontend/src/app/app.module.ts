@@ -1,5 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +18,7 @@ import { CompanyViewComponent } from './company-view/company-view.component';
 import { SchedulePickupComponent } from './schedule-pickup/schedule-pickup.component';
 import { WriteComplaintComponent } from './write-complaint/write-complaint.component';
 import { ViewComplaintComponent } from './view-complaint/view-complaint.component';
-import { ReplyComplaintComponent } from './reply-complaint/reply-complaint.component';
+//import { ReplyComplaintComponent } from './reply-complaint/reply-complaint.component';
 import { EquipmentViewComponent } from './equipment-view/equipment-view.component';
 import { HomepageAdminComponent } from './homepage-admin/homepage-admin.component';
 import { HomepageUserComponent } from './homepage-user/homepage-user.component';
@@ -27,7 +36,7 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     SchedulePickupComponent,
     WriteComplaintComponent,
     ViewComplaintComponent,
-    ReplyComplaintComponent,
+  //  ReplyComplaintComponent,
     EquipmentViewComponent,
     HomepageAdminComponent,
     HomepageUserComponent,
@@ -37,7 +46,17 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule,
+    MatCardModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTableModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    ToastrModule.forRoot()
   ],
   providers: [TypeAuthorizationGuard],
   bootstrap: [AppComponent]

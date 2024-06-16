@@ -32,4 +32,9 @@ public complaintData = new MatTableDataSource<ComplaintDTO>
   {
 	  this.response = response;
   }
+  
+  public back()
+  {
+	  this.router.navigate(['/user-homepage']);
+  }
 }

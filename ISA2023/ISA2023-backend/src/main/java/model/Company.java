@@ -30,7 +30,7 @@ public class Company {
 	private LocalTime closingHours;
 	
 	ArrayList<String> availableEquimpent;
-	ArrayList<ScheduledPickup> availablePickups;
+//	ArrayList<ScheduledPickup> availablePickups;
 	ArrayList<User> admins;
 	
 	public Company() {
@@ -38,7 +38,7 @@ public class Company {
 	}
 
 	public Company(Long id, String name, String address, LocalTime openingHours, LocalTime closingHours, ArrayList<String> availableEquimpent,
-			ArrayList<ScheduledPickup> availablePickups, ArrayList<User> admins) {
+			 ArrayList<User> admins) {
 		super();
 		if(id != null)
 		{
@@ -49,7 +49,7 @@ public class Company {
 		this.openingHours = openingHours;
 		this.closingHours = closingHours;
 		this.availableEquimpent = availableEquimpent;
-		this.availablePickups = availablePickups;
+		//this.availablePickups = availablePickups;
 		this.admins = admins;
 	}
 
@@ -85,13 +85,13 @@ public class Company {
 		this.availableEquimpent = availableEquimpent;
 	}
 
-	public ArrayList<ScheduledPickup> getAvailablePickups() {
+/*	public ArrayList<ScheduledPickup> getAvailablePickups() {
 		return availablePickups;
 	}
 
 	public void setAvailablePickups(ArrayList<ScheduledPickup> availablePickups) {
 		this.availablePickups = availablePickups;
-	}
+	}*/
 
 	public ArrayList<User> getAdmins() {
 		return admins;

@@ -25,12 +25,12 @@ public class ScheduledPickupService {
 	
 	public boolean schedule(User user, ScheduledPickup scheduledPickup)
 	{
-		if(scheduledPickup.getUser() != null)
+		if(scheduledPickup.getUsers() != null)
 		{
 			return false;
 		}
 			
-		scheduledPickup.setUser(user);
+		scheduledPickup.setUser(user.getUsername());
 		scheduledPickups.save(scheduledPickup);
 		return true;
 	}
@@ -42,14 +42,14 @@ public class ScheduledPickupService {
 		{
 			for(ScheduledPickup sp: scheduledPickups.findByCompany(company))
 			{
-				if(sp.getAdmin() == a && sp.getScheduledTimeEnd().isAfter(scheduledPickup.getScheduledTimeStart()))
+				if(sp.getAdmins() == a.getUsername() && sp.getScheduledTimeEnd().isAfter(scheduledPickup.getScheduledTimeStart()))
 				{
 					free = false;
 				}
 			}
 			if(free)
 			{
-				scheduledPickup.setAdmin(a);
+				scheduledPickup.setAdmins(a.getUsername());
 				return true;
 			}
 		}
@@ -58,11 +58,11 @@ public class ScheduledPickupService {
 	
 	public boolean freeExpired(ScheduledPickup scheduledPickup)
 	{
-		if(scheduledPickup.getAdmin() != null)
+		if(scheduledPickup.getAdmins() != null)
 		{
 			if(scheduledPickup.getScheduledTimeEnd().isBefore(LocalTime.now()))
 			{
-				scheduledPickup.setAdmin(null);
+				scheduledPickup.setAdmins(null);
 				return true;
 			}
 		}

@@ -141,6 +141,20 @@ public class UserService {
 		return users.findByUsername(username);
 	}
 	
+	public User getByCredentials(String credentials) 
+	{
+		if(users.findByUsername(credentials) != null)	
+		{
+			return users.findByUsername(credentials);
+		}
+		else if (users.findByEmail(credentials) != null)
+		{
+		return users.findByEmail(credentials);
+		}
+		else
+		return null;
+	}
+	
 	public User getByEmail(String email) 
 	{
 		return users.findByEmail(email);

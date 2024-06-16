@@ -34,6 +34,12 @@ export class HomepageUserComponent implements OnInit {
     })
   }
   
+  public view(company : string)
+  {
+	  localStorage.setItem('companyName', company);
+	  this.router.navigate(['/schedule-pickup']);
+  }
+  
   public mySchedules()
   {
 	  this.router.navigate(['/user-schedule']);

@@ -3,15 +3,16 @@
 	<p></p>
 	<form>
 		<mat-label>Company:</mat-label>
-			<mat-select [(value)] = "selected" [dataSource]="companyData" required>
-			<mat-option>{{company.name}}</mat-option>
-			</select>
+			<mat-select (selectionChange) = "getAdmins()">
+			@for (company of companyData; track company)
+			<mat-option [value]="company" [ngModel] = "company">{{company}}</mat-option>
+			</mat-select>
 	<p></p>
 		<mat-label>Administrator:</mat-label>
-			<mat-select [(value)] = "selected" [dataSource]="adminData">
-			<mat-option>None</mat-option>
-			<mat-option>{{user.username}}</mat-option>
-			</select>
+			<mat-select>
+			@for (admin of adminData; track admin)
+			<mat-option [value]="admin" [ngModel] = "admin">{{admin}}</mat-option>
+			</mat-select>
 	<p></p>
 		 <textarea matInput name="response" rows="10" cols="50" overflow-y: scroll [(ngModel)]="content">
 		 </textarea>
@@ -20,5 +21,4 @@
 	<p></p>
     <button mat-flat-button (click)="cancel()">Cancel</button>
 	</form>
-
 </html>

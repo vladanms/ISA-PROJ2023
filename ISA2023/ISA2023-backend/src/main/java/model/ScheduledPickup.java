@@ -36,16 +36,16 @@ public class ScheduledPickup {
 	@Column(name = "durationMinutes", nullable = false)
 	private int durationMinutes;
 	
-	private Company company;
-	private User admin;
-	private User user;
+	private String company;
+	private String admins;
+	private String users;
 	
 	public ScheduledPickup() {
 		super();
 	}
 
 	public ScheduledPickup(Long id, LocalDate scheduledDate, LocalTime scheduledTimeStart, LocalTime scheduledTimeEnd,
-			 Company company, String equipment, User admin, User user) {
+			String company, String equipment, String admins, String users) {
 		super();
 		this.id = id;
 		this.scheduledDate = scheduledDate;
@@ -54,8 +54,8 @@ public class ScheduledPickup {
 		this.durationMinutes = ((int) Duration.between(scheduledTimeStart, scheduledTimeEnd).toMinutes());
 		this.company = company;
 		this.equipment = equipment;
-		this.admin = admin;
-		this.user = user;
+		this.admins = admins;
+		this.users = users;
 	}
 
 	public Long getId() {
@@ -98,11 +98,11 @@ public class ScheduledPickup {
 		this.durationMinutes = durationMinutes;
 	}
 
-	public Company getCompany() {
+	public String getCompany() {
 		return company;
 	}
 
-	public void setCompany(Company company) {
+	public void setCompany(String company) {
 		this.company = company;
 	}
 
@@ -114,20 +114,20 @@ public class ScheduledPickup {
 		this.equipment = equipment;
 	}
 
-	public User getAdmin() {
-		return admin;
+	public String getAdmins() {
+		return admins;
 	}
 
-	public void setAdmin(User admin) {
-		this.admin = admin;
+	public void setAdmins(String admins) {
+		this.admins = admins;
 	}
 
-	public User getUser() {
-		return user;
+	public String getUsers() {
+		return users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(String users) {
+		this.users = users;
 	}
 	
 	

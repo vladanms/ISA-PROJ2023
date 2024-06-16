@@ -18,17 +18,17 @@ public class ScheduledPickupDTO {
 	private LocalTime scheduledTimeStart;
 	private LocalTime scheduledTimeEnd;
 	private int durationMinutes;
-	private Company company;
+	private String company;
 	private String equipment;
-	private User admin;
-	private User user;
+	private String admin;
+	private String user;
 	
 	public ScheduledPickupDTO() {
 		super();
 	}
 
 	public ScheduledPickupDTO(LocalDate scheduledDate, LocalTime scheduledTimeStart, LocalTime scheduledTimeEnd,
-			 Company company, String equipment, User admin, User user) {
+			String company, String equipment, String admin, String user) {
 		super();
 		this.scheduledDate = scheduledDate;
 		this.scheduledTimeStart = scheduledTimeStart;
@@ -72,11 +72,11 @@ public class ScheduledPickupDTO {
 		this.durationMinutes = durationMinutes;
 	}
 
-	public Company getCompany() {
+	public String getCompany() {
 		return company;
 	}
 
-	public void setCompany(Company company) {
+	public void setCompany(String company) {
 		this.company = company;
 	}
 
@@ -88,19 +88,19 @@ public class ScheduledPickupDTO {
 		this.equipment = equipment;
 	}
 
-	public User getAdmin() {
+	public String getAdmin() {
 		return admin;
 	}
 
-	public void setAdmin(User admin) {
+	public void setAdmin(String admin) {
 		this.admin = admin;
 	}
 
-	public User getUser() {
+	public String getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 

@@ -46,7 +46,7 @@ public class ScheduledPickupController {
 	{
 			ScheduledPickup pickup = new ScheduledPickup();
 			
-			pickup.setAdmin(scheduledPickupDTO.getAdmin());
+			pickup.setAdmins(scheduledPickupDTO.getAdmin());
 			pickup.setCompany(scheduledPickupDTO.getCompany());
 			pickup.setDurationMinutes(scheduledPickupDTO.getDurationMinutes());
 			pickup.setEquipment(scheduledPickupDTO.getEquipment());
@@ -116,7 +116,7 @@ public class ScheduledPickupController {
 		
 		for(ScheduledPickup sp : scheduledPickupService.getByCompany(company))
 		{
-			if(sp.getUser() == null)
+			if(sp.getUsers() == null)
 			{
 				res.add(new ScheduledPickupViewDTO(
 						sp.getId().toString(),
@@ -124,8 +124,8 @@ public class ScheduledPickupController {
 						sp.getScheduledDate().toString(),
 						sp.getScheduledTimeStart().toString(),
 						sp.getScheduledTimeEnd().toString(),
-						sp.getCompany().getName(),
-						sp.getAdmin().getUsername(),
+						sp.getCompany(),
+						sp.getAdmins(),
 						""
 						)
 				);
@@ -150,8 +150,8 @@ public class ScheduledPickupController {
 						sp.getScheduledDate().toString(),
 						sp.getScheduledTimeStart().toString(),
 						sp.getScheduledTimeEnd().toString(),
-						sp.getCompany().getName(),
-						sp.getAdmin().getUsername(),
+						sp.getCompany(),
+						sp.getAdmins(),
 						""
 						)
 				);
@@ -168,7 +168,7 @@ public class ScheduledPickupController {
 		
 		for(ScheduledPickup sp : scheduledPickupService.getByUser(user))
 		{
-			if(sp.getUser() == null)
+			if(sp.getUsers() == null)
 			{
 				res.add(new ScheduledPickupViewDTO(
 						sp.getId().toString(),
@@ -176,11 +176,67 @@ public class ScheduledPickupController {
 						sp.getScheduledDate().toString(),
 						sp.getScheduledTimeStart().toString(),
 						sp.getScheduledTimeEnd().toString(),
-						sp.getCompany().getName(),
-						sp.getAdmin().getUsername(),
-						sp.getUser().getUsername()
+						sp.getCompany(),
+						sp.getAdmins(),
+						sp.getUsers()
 						)
 				);
+			}
+		}		
+		return res;
+	}
+	
+	@GetMapping("/getCompaniesByUser")
+	public @ResponseBody ArrayList<String> getCompaniesByUser(@Param("name") String name)
+	{
+		ArrayList<String> res = new ArrayList<String>();
+		String company = "";
+
+		for(ScheduledPickup sp : scheduledPickupService.getByUser(userService.getByCredentials(name)))
+		{
+				company = sp.getCompany();
+				if(!res.contains(company))
+				{
+					res.add(company);
+				}
+			
+		}		
+		return res;
+	}
+	
+	@GetMapping("/getAdminsByUser")
+	public @ResponseBody ArrayList<String> getAdminsByUser(@Param("name") String name)
+	{
+		ArrayList<String> res = new ArrayList<String>();
+		String admin = "";
+
+		for(ScheduledPickup sp : scheduledPickupService.getByUser(userService.getByCredentials(name)))
+		{
+				admin = sp.getAdmins();
+				if(!res.contains(admin))
+				{
+					res.add(admin);
+				}
+			
+		}		
+		return res;
+	}
+	
+	@GetMapping("/getAdminsByUserCompany")
+	public @ResponseBody ArrayList<String> getAdminsByUserCompany(@Param("name") String name, @Param("company") String company)
+	{
+		ArrayList<String> res = new ArrayList<String>();
+		String admin = "";
+
+		for(ScheduledPickup sp : scheduledPickupService.getByUser(userService.getByCredentials(name)))
+		{
+			if(sp.getCompany() == company)
+			{
+				admin = sp.getAdmins();
+				if(!res.contains(admin))
+				{
+					res.add(admin);
+				}
 			}
 		}		
 		return res;

@@ -42,13 +42,13 @@ public class CompanyController {
 	}
 	
 	@GetMapping("/getByName")
-	public @ResponseBody ArrayList<CompanyViewDTO> geByName(@Param("name") String name)
+	public @ResponseBody ArrayList<CompanyViewDTO> getByName(@Param("name") String name)
 	{
 		ArrayList<CompanyViewDTO> res = new ArrayList<CompanyViewDTO>();
 		
 		for(Company c: service.getAll())
 		{
-			if(c.getName().contains(name) || name == "null") {
+			if(c.getName().contains(name) || name == "null" || name == "") {
 			res.add(
 					new CompanyViewDTO(
 							c.getId().toString(),
@@ -58,6 +58,40 @@ public class CompanyController {
 							c.getClosingHours().toString()
 					)
 					);
+		}
+		}
+		return res;		
+	}
+	
+	@GetMapping("/getEquipment")
+	public @ResponseBody ArrayList<String> getEquipment(@Param("name") String name)
+	{		
+		ArrayList<String> res = new ArrayList<String>();
+	
+		for(Company c: service.getAll())
+		{
+			if(c.getName() == name) {
+				res = c.getAvailableEquimpent();
+			}
+		}
+		return res;		
+	}
+	
+	@GetMapping("/filterEquipment")
+	public @ResponseBody ArrayList<String> filterEquipment(@Param("name") String name, @Param("equipment") String equipment)
+	{
+		ArrayList<String> res = new ArrayList<String>();
+		
+		for(Company c: service.getAll())
+		{
+			if(c.getName() == name) {
+				for(String eq : c.getAvailableEquimpent())
+				{
+					if(eq.contains(equipment) || equipment == "" || equipment == null)
+					{
+						res.add(eq);
+					}
+				}
 		}
 		}
 		return res;		

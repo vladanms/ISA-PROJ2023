@@ -1,16 +1,16 @@
 <html>
-	<mat-label>{{company.name}}</mat-label>
+	<mat-label>{{companyName}}</mat-label>
 	<p></p>
 	<mat-label>Available products</mat-label>
 	<p></p>
-	<table mat-table [dataSource]="companyData">
+	<table mat-table [dataSource]="equipmentData">
 	<ng-container matColumnDef="name">
         <th mat-header-cell>Name</th>
-        <td mat-cell>{{product.name}}</td>
+        <td mat-cell *matCellDef="let equipment">{{equipments}}</td>
     </ng-container>
 	 <ng-container matColumnDef="availablePickups">
         <th mat-header-cell>View</th>
-        <td mat-cell><button mat-flat-button (click)="view(company.id)">View</button></td>
+        <td mat-cell *matCellDef="let equipment"><button mat-flat-button (click)="View(equipment.name)">View</button></td>
     </ng-container>
 	</table>
 	<p></p>
@@ -19,8 +19,8 @@
 		<mat-label>Filter products:</mat-label>
 		<p></p>	
 		<mat-label>Name:</mat-label>
-        <input matInput name="name" [(ngModel)]="name">
+        <input matInput name="filter" [(ngModel)]="filter">
 		<p></p>
-        <button mat-flat-button (click)="Search()">Filter</button>
+        <button mat-flat-button (click)="Filter()">Filter</button>
     </form>
 </html>

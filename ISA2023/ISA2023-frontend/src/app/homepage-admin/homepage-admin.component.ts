@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ComplaintDTO } from '../dto/complaintDTO';
+import { MatTableModule } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
 import { HomepageAdminService } from '../service/homepage-admin.service';
 import { ToastrService } from 'ngx-toastr';
@@ -43,4 +44,11 @@ export class HomepageAdminComponent implements OnInit {
 			this.homepageAdminService.Reply(this.id, this.response);
 		}
   	}
+  public logout()
+  {
+	  localStorage.setItem('companyName', '');
+	  localStorage.setItem('currentUser', '');
+	  localStorage.setItem('currentUserType', '');
+	  this.router.navigate(['/login']);
+  }
 }

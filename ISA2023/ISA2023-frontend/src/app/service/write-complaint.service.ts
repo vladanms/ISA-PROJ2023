@@ -23,5 +23,15 @@ export class WriteComplaintService {
 	  }  
 	  return this.http.post<any>(this.apiHost + 'complaints/write', complaintDTO, {headers: this.headers});
   }
+  
+  getAdmins(name : string, company : string)
+  {
+	   return this.http.get<string[]>(this.apiHost + 'scheduledPickup/getAdminsByUserCompany?name=' + name + "?company=" + company, {headers: this.headers});
+  }
+  
+  getCompanies(name : string)
+  {
+	   return this.http.get<string[]>(this.apiHost + 'scheduledPickup/getCompanyByUser?name=' + name, {headers: this.headers});
+  }
 	
  }

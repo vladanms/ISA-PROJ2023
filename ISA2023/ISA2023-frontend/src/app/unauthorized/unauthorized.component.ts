@@ -11,5 +11,10 @@ export class UnauthorizedComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+  public back()
+  {
+	  
+  }
 
 }

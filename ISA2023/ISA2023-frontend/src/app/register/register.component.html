@@ -3,51 +3,51 @@
 	<p></p>
 	<form>
 		<mat-label>Username: </mat-label>
-		<input matInput name="name"[(ngModel)]="username"></input>
+		<input matInput name="name"[(ngModel)]="username">
 		<p></p>
 		
 		<mat-label>Password: </mat-label>
-		<input matInput name="password" type = "password" [(ngModel)]="password"></input>
+		<input matInput name="password" type = "password" [(ngModel)]="password">
 		<p></p>
 		
 		<mat-label>E-mail: </mat-label>
-		<input matInputname="email"[(ngModel)]="email"></input>
+		<input matInputname="email"[(ngModel)]="email">
 		<p></p>
 		
 		<mat-label>Name: </mat-label>
-		<input matInput name="name"[(ngModel)]="name"></input>
+		<input matInput name="name"[(ngModel)]="name">
 		<p></p>
 		
 		<mat-label>Surname: </mat-label>
-		<input matInput name="surname"[(ngModel)]="surname"></input>
+		<input matInput name="surname"[(ngModel)]="surname">
 		<p></p>
 		
 		<mat-label>Gender: </mat-label>
 		<select name="gender"[(ngModel)]="gender">
-			<option [ngValue] = "male">Male</option>
-			<option [ngValue] = "female">Female</option>
-			<option [ngValue] = "undisclosed">Undisclosed</option>
+			<option value = "male">Male</option>
+			<option value = "female">Female</option>
+			<option value = "undisclosed">Undisclosed</option>
 		</select>
 		<p></p>
 		
 		<mat-label>Personal ID: </mat-label>
-		<input matInput name="personalId"[(ngModel)]="personalId"></input>
+		<input matInput name="personalId"[(ngModel)]="personalId">
 		<p></p>
 		
 		<mat-label>Phone: </mat-label>
-		<input matInput name="phone"[(ngModel)]="phone"></input>
+		<input matInput name="phone"[(ngModel)]="phone">
 		<p></p>
 		
 		<mat-label>Address: </mat-label>
-		<input matInput name="address"[(ngModel)]="address"></input>
+		<input matInput name="address"[(ngModel)]="address">
 		<p></p>
 		
 		<mat-label>City: </mat-label>
-		<input matInput name="city"[(ngModel)]="city"></input>
+		<input matInput name="city"[(ngModel)]="city">
 		<p></p>
 		
 		<mat-label>Country: </mat-label>
-		<input matInput name="country"[(ngModel)]="country"></input>
+		<input matInput name="country"[(ngModel)]="country">
 		<p></p>
 
 		<button mat-flat-button (click) = "submit()"></button>
